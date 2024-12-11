@@ -5,7 +5,7 @@ import os
 
 # Function to open and display an image based on user input
 def open_image_from_input():
-    # Get the image name (or fe path) entered by the user
+    # Get the image name (or file path) entered by the user
     image_name = entry.get().strip()#
 	
     if not image_name:
