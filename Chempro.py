@@ -5,7 +5,7 @@ import os
 
 # Function to open and display an image based on user input
 def open_image_from_input():
-    # Get the image name (or file path) entered by the user
+    # Get the image name (or fe path) entered by the user
     image_name = entry.get().strip()#
 	
     if not image_name:
@@ -13,7 +13,7 @@ def open_image_from_input():
         messagebox.showerror("Input Error", "Please enter the name of the reaction.")
         return  # Do nothing if the input is empty
     # Set the image file path
-    image_path = f"/storage/emulated/0/Chem Project/Images/{image_name}.png"
+    image_path = f"Images/{image_name}.png"
     
     # Check if the image file exists
     if not os.path.exists(image_path):
