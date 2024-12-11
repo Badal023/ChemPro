@@ -1,60 +1,40 @@
-import tkinter as tk
-from tkinter import messagebox
-from PIL import Image, ImageTk
 import os
+from PIL import Image
+import matplotlib.pyplot as plt
+from google.colab import files
 
 # Function to open and display an image based on user input
-def open_image_from_input():
+def open_image_from_input(image_name):
     # Get the image name (or file path) entered by the user
-    image_name = entry.get().strip()#
-	
+    image_name = image_name.strip()  # Assume image_name is already passed to the function
+    
     if not image_name:
-        # Show an error message if no input is entered
-        messagebox.showerror("Input Error", "Please enter the name of the reaction.")
+        print("Please enter the name of the reaction.")
         return  # Do nothing if the input is empty
+    
     # Set the image file path
-    image_path = f"Images/{image_name}.png"
+    image_path = f"Images/{image_name}.png"  # Update the path to the correct location in Colab
     
     # Check if the image file exists
     if not os.path.exists(image_path):
-        # Show an error message if the image file is not found
-        messagebox.showerror("Error", f"The reaction '{image_name}' was not found,\n Please check spelling from list")
+        print(f"The reaction '{image_name}' was not found. Please check spelling.")
         return
 
     try:
         # Try to open the image using PIL
         image = Image.open(image_path)
         
-        # Convert the image to a format Tkinter can display
-        tk_image = ImageTk.PhotoImage(image)
-        
-        # Update the label with the image
-        label.config(image=tk_image)
-        label.image = tk_image  # Keep a reference to the image to prevent garbage collection
+        # Display the image using matplotlib
+        plt.imshow(image)
+        plt.axis('off')  # Hide axes
+        plt.show()
     except Exception as e:
-        # Show an error message if there is a problem loading the image
-        messagebox.showerror("Loading Error", f"Error loading image: {e}")
-        return
+        print(f"Error loading image: {e}")
 
-# Set up the main Tkinter window
-root = tk.Tk()
-root.title("Open Image from File Name")
 
-# Create a Label widget for normal text (e.g., a title or instructions)
-normal_text_label = tk.Label(root, text="Enter the name of the reaction\n(or enter 'list' to get list of reactions)")
-normal_text_label.pack(pady=10)
 
-# Create an Entry widget for the user to enter the image file name
-entry = tk.Entry(root, width=30)
-entry.pack(pady=10)
+# Step 2: Ask for the image name
+image_name = input("Enter the name of the reaction image (without the .png extension): ")
 
-# Create a Button widget to trigger the function when clicked
-open_button = tk.Button(root, text="Find reaction", command=open_image_from_input)
-open_button.pack(pady=10)
-
-# Create a Label widget to display the image
-label = tk.Label(root)
-label.pack(pady=10)
-
-# Start the Tkinter event loop
-root.mainloop()
+# Step 3: Call the function with the provided image name
+open_image_from_input(image_name)
