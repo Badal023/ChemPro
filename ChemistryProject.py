@@ -13,7 +13,7 @@ def open_image_from_input():
         messagebox.showerror("Input Error", "Please enter the name of the reaction.")
         return  # Do nothing if the input is empty
     # Set the image file path
-    image_path = f"/storage/emulated/0/Chem Project/Images/{image_name}.png"
+    image_path = f"Images/{image_name}.png"
     
     # Check if the image file exists
     if not os.path.exists(image_path):
